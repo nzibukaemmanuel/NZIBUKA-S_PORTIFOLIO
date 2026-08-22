@@ -1,0 +1,50 @@
+<div
+  id="cmdk-overlay"
+  class="cmdk-overlay"
+  [class.open]="palette.isOpen()"
+  [attr.aria-hidden]="!palette.isOpen()"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Command palette"
+  (click)="onOverlayClick($event)"
+>
+  <div class="cmdk" #dialog>
+    <div class="cmdk-input-row">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input
+        #cmdkInput
+        type="text"
+        placeholder="Jump to a section…"
+        aria-label="Command palette search"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="cmdk-listbox"
+        [attr.aria-activedescendant]="filtered().length ? 'cmdk-option-' + activeIndex() : null"
+        [value]="query()"
+        (input)="onQueryInput($event)"
+        (keydown)="onInputKeydown($event)"
+      />
+      <kbd>Esc</kbd>
+    </div>
+    <div class="cmdk-list" id="cmdk-listbox" role="listbox">
+      @if (filtered().length === 0) {
+        <div class="cmdk-empty">No matches. Try "projects" or "contact".</div>
+      } @else {
+        @for (cmd of filtered(); track cmd.target; let i = $index) {
+          <div
+            [id]="'cmdk-option-' + i"
+            class="cmdk-item"
+            [class.active]="i === activeIndex()"
+            role="option"
+            [attr.aria-selected]="i === activeIndex()"
+            (click)="select(i)"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            <span>{{ cmd.label }}</span>
+            <span style="margin-left:auto;color:var(--text-tertiary);font-size:0.8rem;">{{ cmd.hint }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

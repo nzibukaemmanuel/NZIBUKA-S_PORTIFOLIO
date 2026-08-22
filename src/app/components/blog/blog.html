@@ -1,0 +1,22 @@
+<section id="blog" style="background:var(--bg-subtle);">
+  <div class="container">
+    <div class="section-head reveal" appReveal>
+      <span class="section-eyebrow">06 — Writing</span>
+      <h2>From the blog</h2>
+      <p>Notes on what I'm building and learning along the way.</p>
+    </div>
+
+    <ul class="blog-grid">
+      @for (post of posts; track post.title) {
+        <li>
+          <article class="card blog-card reveal" appReveal>
+            <div class="blog-meta"><span>{{ post.date }}</span><span>{{ post.readTime }}</span></div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.excerpt }}</p>
+            <a href="#" class="read-more" [attr.aria-label]="'Read more about ' + post.title">Read more →</a>
+          </article>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

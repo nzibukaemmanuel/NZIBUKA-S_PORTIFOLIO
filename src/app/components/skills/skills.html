@@ -1,0 +1,32 @@
+<section id="skills" style="background:var(--bg-subtle);">
+  <div class="container">
+    <div class="section-head reveal" appReveal>
+      <span class="section-eyebrow">02 — Skills</span>
+      <h2>Proficiency</h2>
+      <p>What each skill covers, at a glance.</p>
+    </div>
+
+    <div class="card" style="padding: var(--space-4);">
+      <div class="skills-grid">
+        <div>
+          @for (skill of column1; track skill.label) {
+            <div class="skill-row">
+              <div class="skill-label"><span>{{ skill.label }}</span><span>{{ skill.level }}%</span></div>
+              <div class="skill-track"><div class="skill-fill" [appAnimateSkillBar]="skill.level"></div></div>
+              <p class="skill-detail">{{ skill.detail }}</p>
+            </div>
+          }
+        </div>
+        <div>
+          @for (skill of column2; track skill.label) {
+            <div class="skill-row">
+              <div class="skill-label"><span>{{ skill.label }}</span><span>{{ skill.level }}%</span></div>
+              <div class="skill-track"><div class="skill-fill" [appAnimateSkillBar]="skill.level"></div></div>
+              <p class="skill-detail">{{ skill.detail }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

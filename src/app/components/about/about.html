@@ -1,0 +1,45 @@
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal" appReveal>
+      <span class="section-eyebrow">01 — About</span>
+      <h2>Who I am, and where I'm headed</h2>
+      <p>A quick look at how I work, what I'm building, and where I'm growing next.</p>
+    </div>
+
+    <ul class="about-grid">
+      @for (card of cards; track card.title) {
+        <li class="card about-card reveal" appReveal>
+          <div class="icon" aria-hidden="true">
+            @switch (card.icon) {
+              @case ('who') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg>
+              }
+              @case ('what') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M8 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-3"/><path d="M18 2l4 4-11 11H7v-4z"/></svg>
+              }
+              @case ('learning') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12L3 7l9-5 9 5-9 5z"/></svg>
+              }
+              @case ('goals') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              }
+            }
+          </div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.body }}</p>
+        </li>
+      }
+    </ul>
+
+    <h3 class="sr-only">My journey so far</h3>
+    <ul class="timeline">
+      @for (item of timeline; track item.title) {
+        <li class="timeline-item" appReveal>
+          <span class="timeline-year">{{ item.year }}</span>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.body }}</p>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

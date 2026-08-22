@@ -1,0 +1,13 @@
+<section style="background:var(--bg-subtle);">
+  <div class="container">
+    <h2 class="sr-only">By the numbers</h2>
+    <div class="stats-row reveal" appReveal>
+      @for (stat of stats; track stat.label) {
+        <div class="stat-block">
+          <div class="stat-num" [appCountUp]="stat.target" [suffix]="stat.suffix">0</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

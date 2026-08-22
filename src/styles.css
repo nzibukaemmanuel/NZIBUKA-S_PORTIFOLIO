@@ -1,0 +1,5 @@
+/* Global styles: design tokens, reset, shared component classes, animations. */
+@import './app/shared/styles/tokens.css';
+@import './app/shared/styles/theme-overrides.css';
+@import './app/shared/styles/utilities.css';
+@import './app/shared/styles/animations.css';

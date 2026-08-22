@@ -1,0 +1,59 @@
+<div
+  class="modal-overlay"
+  [class.open]="project()"
+  [attr.aria-hidden]="!project()"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="project() ? 'project-modal-title' : null"
+  (click)="onOverlayClick($event)"
+>
+  <div class="modal" #dialog>
+    @if (project(); as p) {
+      <div class="modal-inner">
+        <div class="modal-hero">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.4 20.4L3 12l6.4-8.4M14.6 3.6L21 12l-6.4 8.4"/></svg>
+        </div>
+        <button class="modal-close" aria-label="Close project details" (click)="close.emit()">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="modal-scroll">
+          <h3 id="project-modal-title" style="margin-bottom:6px;">{{ p.name }}</h3>
+          <div class="tag-row" style="margin-bottom:18px;">
+            @for (tag of p.tagLabels; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+
+          <div class="modal-section">
+            <h4>Architecture</h4>
+            <p>{{ p.architecture }}</p>
+          </div>
+          <div class="modal-section">
+            <h4>Technologies</h4>
+            <p>{{ p.technologies }}</p>
+          </div>
+          <div class="modal-section">
+            <h4>Key Features</h4>
+            <ul>
+              @for (feature of p.features; track feature) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+          <div class="modal-section">
+            <h4>Challenges Faced</h4>
+            <p>{{ p.challenges }}</p>
+          </div>
+          <div class="modal-section">
+            <h4>Lessons Learned</h4>
+            <p>{{ p.lessons }}</p>
+          </div>
+          <div class="modal-actions">
+            <a class="btn btn-primary" [href]="p.demoUrl" target="_blank" rel="noopener">Live Demo</a>
+            <a class="btn btn-secondary" [href]="p.githubUrl" target="_blank" rel="noopener">GitHub Repo</a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<section>
+  <div class="container">
+    <div class="section-head reveal" appReveal>
+      <span class="section-eyebrow">08 — Kind Words</span>
+      <h2>Testimonials</h2>
+    </div>
+    <ul class="testimonial-grid">
+      @for (t of testimonials; track t.name) {
+        <li class="card testimonial-card reveal" appReveal>
+          <div class="quote-mark" aria-hidden="true">"</div>
+          <p class="quote">{{ t.quote }}</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">{{ t.initials }}</div>
+            <div><div class="author-name">{{ t.name }}</div><div class="author-role">{{ t.role }}</div></div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

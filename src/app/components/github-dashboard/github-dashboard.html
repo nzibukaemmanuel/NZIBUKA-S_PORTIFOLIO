@@ -1,0 +1,39 @@
+<section id="github" style="background:var(--bg-subtle);">
+  <div class="container">
+    <div class="section-head reveal" appReveal>
+      <span class="section-eyebrow">04 — Live Activity</span>
+      <h2>GitHub, in real time</h2>
+      <p>Pulled straight from the GitHub API — no static claims.</p>
+    </div>
+
+    <div class="gh-stats-grid reveal" appReveal>
+      <div class="card gh-stat"><div class="num">{{ github.state().data?.publicRepos ?? '—' }}</div><div class="label">Public repos</div></div>
+      <div class="card gh-stat"><div class="num">{{ github.state().data?.stars ?? '—' }}</div><div class="label">Stars earned</div></div>
+      <div class="card gh-stat"><div class="num">{{ github.state().data?.followers ?? '—' }}</div><div class="label">Followers</div></div>
+      <div class="card gh-stat"><div class="num">{{ github.state().data?.following ?? '—' }}</div><div class="label">Following</div></div>
+    </div>
+
+    <div class="repo-list reveal" appReveal aria-label="Top repositories">
+      @if (github.state().status === 'loading') {
+        <p style="color:var(--text-secondary);">Loading repositories…</p>
+      } @else if (github.state().data?.topRepos?.length) {
+        @for (repo of github.state().data!.topRepos; track repo.name) {
+          <div class="card repo-item">
+            <a class="name" [href]="repo.url" target="_blank" rel="noopener">{{ repo.name }}</a>
+            <p>{{ repo.description || 'No description provided.' }}</p>
+            <div class="repo-meta">
+              <span>★ {{ repo.stars }}</span>
+              <span>⑂ {{ repo.forks }}</span>
+              @if (repo.language) {
+                <span>{{ repo.language }}</span>
+              }
+            </div>
+          </div>
+        }
+      } @else {
+        <p style="color:var(--text-secondary);">No public repositories found yet.</p>
+      }
+    </div>
+    <p class="gh-status" role="status" aria-live="polite">{{ github.state().statusText }}</p>
+  </div>
+</section>
