@@ -55,7 +55,11 @@
             </ul>
             <div class="project-actions">
               <button class="btn btn-secondary btn-sm" (click)="openProject(project)">View Project</button>
-              <a class="btn btn-primary btn-sm" [href]="project.demoUrl" target="_blank" rel="noopener">Live Demo</a>
+              @if (project.demoUrl !== '#') {
+                <a class="btn btn-primary btn-sm" [href]="project.demoUrl" target="_blank" rel="noopener">Live Demo</a>
+              } @else {
+                <a class="btn btn-primary btn-sm" [href]="project.githubUrl" target="_blank" rel="noopener">View Code</a>
+              }
             </div>
           </div>
         </article>
