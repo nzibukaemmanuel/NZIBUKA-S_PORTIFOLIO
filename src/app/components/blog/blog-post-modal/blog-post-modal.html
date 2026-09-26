@@ -1,0 +1,29 @@
+<div
+  class="modal-overlay"
+  [class.open]="post()"
+  [attr.aria-hidden]="!post()"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="post() ? 'blog-post-modal-title' : null"
+  (click)="onOverlayClick($event)"
+>
+  <div class="modal" #dialog>
+    @if (post(); as p) {
+      <div class="modal-inner">
+        <button class="modal-close" aria-label="Close post" (click)="close.emit()">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="modal-scroll">
+          <div class="blog-meta" style="margin-bottom:6px;"><span>{{ p.date }}</span><span>{{ p.readTime }}</span></div>
+          <h3 id="blog-post-modal-title" style="margin-bottom:18px;">{{ p.title }}</h3>
+
+          @for (paragraph of p.content; track paragraph) {
+            <div class="modal-section">
+              <p>{{ paragraph }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

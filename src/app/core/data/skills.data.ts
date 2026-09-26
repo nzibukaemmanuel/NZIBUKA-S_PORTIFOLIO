@@ -14,6 +14,6 @@ export const SKILLS_COLUMN_1: Skill[] = [
 export const SKILLS_COLUMN_2: Skill[] = [
   { label: 'Node.js & Express.js', level: 88, detail: 'REST APIs, middleware, JWT auth, error handling' },
   { label: 'GraphQL & REST Integration', level: 82, detail: 'Apollo client, schema-driven queries, wiring against Spring Boot & Django APIs' },
-  { label: 'Python & Data Pipelines', level: 72, detail: 'Django REST Framework, ETL pipelines, containerized services' },
+  { label: 'Python & Data Pipelines', level: 83, detail: 'Django REST Framework, ETL pipelines, containerized services' },
   { label: 'Accessibility & Responsive Design', level: 98, detail: 'ARIA, keyboard nav, focus management, mobile-first, AA contrast' },
 ];

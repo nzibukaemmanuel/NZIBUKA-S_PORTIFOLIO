@@ -13,10 +13,17 @@
             <div class="blog-meta"><span>{{ post.date }}</span><span>{{ post.readTime }}</span></div>
             <h3>{{ post.title }}</h3>
             <p>{{ post.excerpt }}</p>
-            <a href="#" class="read-more" [attr.aria-label]="'Read more about ' + post.title">Read more →</a>
+            <button
+              type="button"
+              class="read-more"
+              [attr.aria-label]="'Read more about ' + post.title"
+              (click)="openPost(post)"
+            >Read more →</button>
           </article>
         </li>
       }
     </ul>
   </div>
 </section>
+
+<app-blog-post-modal [post]="selectedPost()" (close)="closePost()" />
