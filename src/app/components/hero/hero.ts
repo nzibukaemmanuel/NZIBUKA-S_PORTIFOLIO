@@ -1,5 +1,6 @@
 import { Component, afterNextRender, signal } from '@angular/core';
 import { prefersReducedMotion } from '../../shared/utils/reduced-motion';
+import { CvPreview } from './cv-preview/cv-preview';
 
 type SegmentType = 'kw' | 'var' | 'str' | 'com' | 'fn' | 'plain';
 
@@ -56,13 +57,14 @@ function segmentHtml(type: SegmentType, text: string): string {
 }
 
 @Component({
-  imports: [],
+  imports: [CvPreview],
   selector: 'app-hero',
   styleUrl: './hero.css',
   templateUrl: './hero.html',
 })
 export class Hero {
   protected readonly terminalHtml = signal('<span class="terminal-cursor"></span>');
+  protected readonly isCvPreviewOpen = signal(false);
 
   constructor() {
     afterNextRender(() => this.typeTerminal());

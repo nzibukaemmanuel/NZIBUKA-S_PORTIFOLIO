@@ -22,6 +22,7 @@
       <p class="hero-tagline">I build fast, accessible, full-stack web applications end to end — from the API or data pipeline to a polished UI.</p>
       <div class="hero-ctas">
         <a href="#projects" class="btn btn-primary">View My Work</a>
+        <button type="button" class="btn btn-secondary" (click)="isCvPreviewOpen.set(true)">Preview CV</button>
         <a href="assets/Emmanuel-Nzibuka-CV.pdf" class="btn btn-secondary" download>Download CV</a>
         <a href="#contact" class="btn btn-ghost">Contact Me</a>
       </div>
@@ -51,3 +52,5 @@
     </div>
   </div>
 </section>
+
+<app-cv-preview [isOpen]="isCvPreviewOpen()" (close)="isCvPreviewOpen.set(false)" />
