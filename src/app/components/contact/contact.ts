@@ -1,5 +1,7 @@
 import { Component, ElementRef, effect, inject, signal, viewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 import { RevealOnScroll } from '../../shared/directives/reveal-on-scroll';
 
 type SubmitState = 'idle' | 'sending' | 'success' | 'error';
@@ -12,6 +14,9 @@ type SubmitState = 'idle' | 'sending' | 'success' | 'error';
 })
 export class Contact {
   private readonly fb = inject(FormBuilder);
+  private readonly http = inject(HttpClient);
+
+  private readonly endpoint = 'https://formsubmit.co/ajax/emmynzibk21@gmail.com';
 
   protected readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
@@ -36,8 +41,19 @@ export class Contact {
 
     this.state.set('sending');
     try {
-      // No backend configured yet — simulate the round trip.
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const { name, email, message } = this.form.getRawValue();
+      const res = await firstValueFrom(
+        this.http.post<{ success?: string | boolean }>(this.endpoint, {
+          name,
+          email,
+          message,
+          _replyto: email,
+          _subject: `Portfolio message from ${name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      );
+      if (String(res?.success) !== 'true') throw new Error('Send failed');
       this.state.set('success');
     } catch {
       this.state.set('error');
